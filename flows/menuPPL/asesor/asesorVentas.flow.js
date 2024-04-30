@@ -11,7 +11,7 @@ const chatwoot = new ChatwootClass({
  *  Flujo para hablar con asesor humano.
  */
 const asesorVentas = addKeyword('#').addAnswer([' En un momento uno de nuestros asesores se pondra en contacto contigo'],null, async (_,{ flowDynamic}) => {
-    await asignarEquipo(dataIn = { team: 3}, chatwoot)
+    await asignarEquipo(dataIn = { team: 1 }, chatwoot)
 })
 
 module.exports = asesorVentas

@@ -5,5 +5,4 @@
 node_modules
 public/*
 !public/.gitkeep
-bot_sessions
-bot.qr.png
+node_modules

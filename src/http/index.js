@@ -3,6 +3,22 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 
+
+
+// Variable para almacenar el estado de autenticación
+let authenticated = false;
+
+// Middleware para verificar la autenticación antes de servir la imagen QR
+const checkAuth = (req, res, next) => {
+  // Si está autenticado, permite el acceso
+  if (authenticated) {
+      next();
+  } else {
+      // Si no está autenticado, redirige a la página de inicio de sesión
+      res.redirect('/login');
+  }
+};
+
 class ServerHttp {
   app;
   port;
@@ -11,18 +27,45 @@ class ServerHttp {
     this.port = _port;
   }
 
-  // CONTROLADOR PARA MOSTRAR EL CODIGO QR PARA INICIAR SESION EN EL CHATBOT
-  /**
-   * este es el controlador para mostar el qr code
-   * @param {*} _
-   * @param {*} res
-   */
-  qrCtrl = (_, res) => {
-    const pathQrImage = join(process.cwd(), `bot.qr.png`);
-    const fileStream = fs.createReadStream(pathQrImage);
-    res.writeHead(200, { "Content-Type": "image/png" });
-    fileStream.pipe(res);
-  };
+// Ruta para mostrar el formulario de autenticación
+login = (req, res) => {
+  res.send(`
+      <form action="/authenticate" method="POST">
+          <label for="key">Clave:</label>
+          <input type="password" id="key" name="key">
+          <button type="submit">Enviar</button>
+      </form>
+  `);
+}
+
+// Ruta para autenticar la clave
+authenticate = (req, res) => {
+  const providedKey = req.body.key;
+  const correctKey = 'LogaCO.,23'; // Reemplaza 'tu_clave_secreta' con tu clave real
+  if (providedKey === correctKey) {
+      // Si la clave es correcta, establece el estado de autenticación como verdadero
+      authenticated = true;
+      // Redirige a la ruta para mostrar la imagen QR
+      res.redirect('/scan-qr');
+  } else {
+      // Si la clave es incorrecta, muestra un mensaje de error
+      res.send('Clave incorrecta. Intenta de nuevo.');
+  }
+}
+
+// Ruta para mostrar la imagen QR
+qrCtrl = (req, res) => {
+  const pathQrImage = path.join(process.cwd(), `bot.qr.png`);
+  const fileStream = fs.createReadStream(pathQrImage);
+  res.writeHead(200, { "Content-Type": "image/png" });
+  fileStream.pipe(res);
+  // Reiniciar el estado de autenticación después de un minuto
+  setTimeout(() => {
+    authenticated = false;
+}, 60000); // 60000 milisegundos = 1 minuto
+
+}
+
 
   // CONTROLADORES PARA ENVIAR ARCHIVOS DE TIPO MULTIMEDIA EN EL CHATBOT
   /**
@@ -39,8 +82,6 @@ class ServerHttp {
       "catalogo",
       nombreArchivo
     ); // Ajustamos la ruta del archivo PDF
-
-    console.log("Ruta del archivo PDF:", rutaArchivoPDF); // Agregar log aquí
 
     fs.access(rutaArchivoPDF, fs.constants.F_OK, (err) => {
       // Corregir variable rutaArchivo a rutaArchivoPDF
@@ -76,7 +117,6 @@ class ServerHttp {
       nombreArchivo
     );
 
-    console.log("Ruta del archivo PDF:", rutaArchivoImagen);
 
     fs.access(rutaArchivoImagen, fs.constants.F_OK, (err) => {
       if (err) {
@@ -116,7 +156,6 @@ class ServerHttp {
       nombreArchivo
     );
 
-    console.log("Ruta del archivo de video:", rutaArchivoVideo);
 
     fs.access(rutaArchivoVideo, fs.constants.F_OK, (err) => {
       if (err) {
@@ -141,7 +180,6 @@ class ServerHttp {
         res.setHeader("Content-Type", contentType);
         // Enviar el video
         res.send(data);
-        console.log("Video enviado correctamente", res);
       });
     });
   };
@@ -153,6 +191,7 @@ class ServerHttp {
    * @param {*} res
    */
   chatwootCtrl = async (req, res) => {
+    console.log("chatwootCtrl");
     const body = req.body;
     const attachments = body?.attachments;
     const bot = req.bot;
@@ -162,7 +201,7 @@ class ServerHttp {
       let currentValueOfTeamId = null;
       const mapperAttributes = body?.changed_attributes;
       
-
+console.log("body", body.labels);
       if (
         body?.event === "conversation_updated")
       {
@@ -176,17 +215,17 @@ class ServerHttp {
               break; // Una vez encontrado, sal del bucle
             }
           }
-        
-        if (currentValueOfTeamId === 3 ) {
+        if (currentValueOfTeamId === 1 || currentValueOfTeamId === 2  || currentValueOfTeamId === 3) {
           
           // Agrega el número de teléfono a la lista dinámica
-          console.log("agrega el número de teléfono a la lista Negra");
+          console.log(`agrega el número ${phone} de teléfono a la lista Negra`);
           bot.dynamicBlacklist.add(phone);
         } 
-        if ( currentValueOfTeamId === 6) {
+        if ( currentValueOfTeamId === 4) {
           // Remueve el número de teléfono de la lista dinámica
-          console.log("remueve el número de teléfono de la lista Negra");
+          console.log(`remueve el número ${phone} de teléfono de la lista Negra`);
           bot.dynamicBlacklist.remove(phone);
+
         }
         res.send("ok");
         return;
@@ -206,7 +245,6 @@ class ServerHttp {
 
         const file = attachments?.length ? attachments[0] : null;
         if (file) {
-          console.log(`Este es el archivo adjunto...`, file.data_url);
           await bot.providerClass.sendMedia(
             `${phone}@c.us`,
             file.data_url,
@@ -224,7 +262,7 @@ class ServerHttp {
 
       res.send("ok");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return res.status(405).send("Error");
     }
   };
@@ -240,6 +278,8 @@ class ServerHttp {
     this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.static("public"));
+    // Middleware para analizar el cuerpo de la solicitud
+this.app.use(express.urlencoded({ extended: true }));
 
     this.app.use((req, _, next) => {
       req.bot = bot;
@@ -247,16 +287,17 @@ class ServerHttp {
     });
 
     this.app.post(`/chatwoot`, this.chatwootCtrl);
-    this.app.get("/scan-qr", this.qrCtrl);
+    this.app.post(`/authenticate`, this.authenticate);
+    
+    
+    this.app.get(`/login`, this.login);
+    this.app.get("/scan-qr",checkAuth, this.qrCtrl);
     this.app.get("/pdf/:nombreArchivo", this.getPdf);
     this.app.get("/imagen/:nombreArchivo", this.getImage);
     this.app.get("/videos/:nombreArchivo", this.getVideo);
 
     this.app.listen(this.port, () => {
-      console.log(`🦮 http://localhost:${this.port}/scan-qr`);
-      console.log(`🦮 http://localhost:${this.port}/pdf/:nombreArchivo`);
-      console.log(`🦮 http://localhost:${this.port}/imagen/:nombreArchivo`);
-      console.log(`🦮 http://localhost:${this.port}/videos/:nombreArchivo`);
+      console.log(`🦮 Bot Clysa Iniciado`);
     });
   };
 }

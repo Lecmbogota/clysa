@@ -78,13 +78,11 @@ class ChatwootClass {
                 headers: this.buildHeader(),
                 method: 'GET'
             })
-
             const data = await dataFetch.json()
             return data.payload[0]
 
         } catch (error) {
-            console.error(`[Error searchByNumber]`, error)
-            return []
+            console.error(`[Error al buscar el numero]`, error)
         }
     }
 
@@ -114,6 +112,7 @@ class ChatwootClass {
             })
 
             const response = await dataFetch.json()
+        console.log(`[Contacto creadoooooooooooooooo]`, response.payload.contact);
             return response.payload.contact
 
         } catch (error) {
@@ -133,13 +132,16 @@ class ChatwootClass {
             dataIn.from = this.formatNumber(dataIn.from)
             const getContact = await this.findContact(dataIn.from)
             if (!getContact) {
+                console.log(`[Contacto no encontrado]`, getContact);
+                console.log(`[Creando contacto]`, dataIn);
                 const contact = await this.createContact(dataIn)
+                console.log(`[Contacto creado]`, contact);
                 return contact
             }
             return getContact
 
         } catch (error) {
-            console.error(`[Error findOrCreateContact]`, error)
+            console.error(`[Error al buscar o crear el contacto]`, error)
             return
         }
     }
@@ -184,6 +186,7 @@ class ChatwootClass {
      * @returns 
      */
     findConversation = async (dataIn = { phone_number: '' }) => {
+
         try {
             dataIn.phone_number = this.formatNumber(dataIn.phone_number)
 
@@ -225,9 +228,10 @@ class ChatwootClass {
     findOrCreateConversation = async (dataIn = { inbox_id: '', contact_id: '', phone_number: '' }) => {
         try {
             dataIn.phone_number = this.formatNumber(dataIn.phone_number)
+
             const getId = await this.findConversation(dataIn)
+
             if (!getId.length) {
-                console.log('Crear conversation')
                 const conversationId = await this.createConversation(dataIn)
                 return conversationId
             }
@@ -269,7 +273,7 @@ class ChatwootClass {
                 }
             );
             const data = await dataFetch.json();
-            //console.log("esa weadaaaaaaaaaa",data);
+
             return data
         } catch (error) {
             console.error(`[Error createMessage]`, error)

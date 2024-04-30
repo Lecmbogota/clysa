@@ -43,6 +43,7 @@ const pantalonetasMenu = require("./flows/menuPPL/catalogo/pantalonetas/pantalon
 const pantalonetasPrecios = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/pantalonetasCatalogoPrecios.flow");
 
 
+
 // Flujos de Finaliza Conversacion
 const finaliza = require("./flows/finaliza.flow");
 
@@ -53,6 +54,13 @@ const quicksilver = require("./flows/menuPPL/catalogo/sombreros/sombreroSub/quic
 const surf = require("./flows/menuPPL/catalogo/sombreros/sombreroSub/surf.flow");
 const aventura = require("./flows/menuPPL/catalogo/sombreros/sombreroSub/aventura.flow");
 const sombrerosMenu = require("./flows/menuPPL/catalogo/sombreros/sombrerosMenu.flow");
+
+// Flujos de preguntas
+const preguntas = require("./flows/menuPPL/preguntas/preguntas.flow");
+const ubicacion = require("./flows/menuPPL/preguntas/preguntasSub/ubicacion.flow");
+const medidas = require("./flows/menuPPL/preguntas/preguntasSub/medidas.flow");
+const telas = require("./flows/menuPPL/preguntas/preguntasSub/telas.flow");
+const modosDePago = require("./flows/menuPPL/preguntas/preguntasSub/metodosDePago.flow");
 
 // Flujos de pedido
 const pedido = require("./flows/pedido.flow");
@@ -76,7 +84,7 @@ function validarHorarioDeAtencion() {
   let dia;
 
   // se valida si el dia actual esta entre lunes y sabado o es domingo
-  if (diaActual >= 0 && diaActual <= 5) {
+  if (diaActual >= 0 && diaActual <= 6) {
     dia = "1"; // Lunes a Sabados
   } else if (diaActual === 6) {
     dia = "2"; // Domingos
@@ -97,12 +105,8 @@ function validarHorarioDeAtencion() {
 }
 
 const flowFiltroHorario = addKeyword(EVENTS.WELCOME).addAnswer('👋 Hola, Gracias por comunicarte con CLYSA')
-.addAction(async (_, { gotoFlow }) => {
-
+.addAction(async (ctx, { gotoFlow}) => {
     if (validarHorarioDeAtencion()) {
-      
-
-
       gotoFlow(bienvenida);
     } else {
       gotoFlow(fueraHorario);
@@ -126,7 +130,7 @@ const queue = new Queue({
 
 const main = async () => {
   const adapterDB = new MockAdapter();
-  const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosInfantiles, flowPreguntas , asesorPreguntas, pantalonetasSub, pantalonetasMenu, pantalonetasPrecios ]);
+  const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosInfantiles, flowPreguntas , asesorPreguntas, pantalonetasSub, pantalonetasMenu, pantalonetasPrecios , preguntas, ubicacion, medidas, telas, modosDePago]);
   const adapterProvider = createProvider(BaileysProvider);
 
   const bot = await createBot({
@@ -137,6 +141,7 @@ const main = async () => {
 
   serverHttp.initialization(bot);
 
+ 
   adapterProvider.on("message", (payload) => {
     queue.enqueue(async () => {
 
@@ -166,7 +171,7 @@ const main = async () => {
           chatwoot
         );
       } catch (err) {
-        //console.log("ERROR", err);
+        console.error("ERROR", err);
       }
     });
   });
@@ -174,6 +179,7 @@ const main = async () => {
   bot.on("send_message", (payload) => {
     queue.enqueue(async () => {
       if(debug === true){console.log("payload out ", payload);}
+
       await handlerMessage(
         {
           phone: payload.numberOrId,
@@ -188,5 +194,6 @@ const main = async () => {
 };
 
 main();
+
 
 module.exports =  {chatwoot};

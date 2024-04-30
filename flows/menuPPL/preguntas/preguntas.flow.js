@@ -17,13 +17,16 @@ const flowPreguntas = addKeyword('#_/CATALOGO/_# ')
     const opcion = parseInt(ctx.body)
     switch(opcion) {
         case 1:
-            await gotoFlow(require('../catalogo/sombreros/sombreros.flow'))
+            await gotoFlow(require('./preguntasSub/metodosDePago.flow'))
           break;
         case 2:
-            await gotoFlow(require('./pantalonetas/pantalonetasSub.flow'))
+            await gotoFlow(require('./preguntasSub/ubicacion.flow'))
           break;
         case 3:
-            await gotoFlow(require('./conjuntosInfantiles/conjuntosInfantiles.flow'))
+            await gotoFlow(require('./preguntasSub/medidas.flow'))
+          break;
+        case 4:
+            await gotoFlow(require('./preguntasSub/telas.flow'))
           break;
         case 8:
             await gotoFlow(require('../asesor/asesorPreguntas.flow'))
@@ -31,12 +34,12 @@ const flowPreguntas = addKeyword('#_/CATALOGO/_# ')
         case 9:
             await gotoFlow(require('../../bienvenida.flow'))
           break;
-        case 4:
+        case 0:
             await gotoFlow(require('../../finaliza.flow'))
           break;
         default:
             await fallBack(`⛔ Haz marcado una opcion Invalida, Intenta de nuevo ⛔`)
-            await gotoFlow(require('../catalogo/catalogo.flow'))
+            await gotoFlow(require('./preguntas.flow'))
           break;
       }
     

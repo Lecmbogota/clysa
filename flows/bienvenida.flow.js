@@ -29,10 +29,10 @@ module.exports = addKeyword('#_MENU_PRINCIPAL_#')
             await gotoFlow(require('./menuPPL/preguntas/preguntas.flow'))
           break;
         case 3:
-            await gotoFlow(require('./menuPPL/asesor/asesorVetasPorMayor.flow'))
+            await gotoFlow(require('./menuPPL/asesor/asesorVentasPorMayor.flow'))
           break;
         case 8:
-            await gotoFlow(require('./menuPPL/asesor/asesorVentas.flow'))
+            await gotoFlow(require('./menuPPL/asesor/asesorPreguntas.flow'))
           break;
         case 0:
             await gotoFlow(require('../flows/finaliza.flow'))

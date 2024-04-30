@@ -7,8 +7,7 @@ module.exports = addKeyword('#_/MENU_PRECIOS_PANTALONETAS/_#').addAnswer(
     ' ',
     '🔷 Unidad $39.500',
     '🔷 PACK X3 26.500 ($79.500)',
-    '🔷 De 6 a 11 unidades $25.500',
-    '🔷 Mayor a 12 unidades $19.500 ($234.000)'
+    '🔷 De 6 a 11 unidades $25.500'
   ]
 ).addAnswer(
   [
@@ -16,8 +15,7 @@ module.exports = addKeyword('#_/MENU_PRECIOS_PANTALONETAS/_#').addAnswer(
     ' ',
     '🔷 UNIDAD $ 35.500',
     '🔷 PACK X 3 $ 23.300 ($70.000)',
-    '🔷 De 6 a 11 unidades $21.500',
-    '🔷 Mayor a 12 unidades $ 17.000 ($204.000)'
+    '🔷 De 6 a 11 unidades $21.500'
   ]
 ).addAnswer(
   [
@@ -26,8 +24,7 @@ module.exports = addKeyword('#_/MENU_PRECIOS_PANTALONETAS/_#').addAnswer(
     '🔴 1 X $28.000',
     '🟠 2 X $45.000',
     '🟢 7 X $105.000',
-    '🔵 12 X $162.000',
-    '🟡 50 X $625.000'
+    '🔵 12 X $162.000'
   ]
 ).addAnswer(
   [
