@@ -2,7 +2,7 @@ const { addKeyword } = require("@bot-whatsapp/bot");
 
 let flowDynamicCompleted = false;
 
-const ConjuntosInfantiles = "https://801x8zzp-3001.use2.devtunnels.ms/pdf/CLYSA-Conjuntos-Infantiles.pdf"
+const ConjuntosInfantiles = "http://54.39.20.253:3001/pdf/CLYSA-Conjuntos-Infantiles.pdf"
 
 
 module.exports = addKeyword("#_/MENU_CONJUNTOS_INFANTILES/_#").addAction(async (_, { flowDynamic, gotoFlow }) => {

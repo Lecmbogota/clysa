@@ -1,16 +1,14 @@
 const { addKeyword } = require("@bot-whatsapp/bot");
+import { sombreros } from '../../../../src/rutas/rutas';
 
 let flowDynamicCompleted = false;
 
 module.exports = addKeyword("#_/IMAGEN_SOMBREROS/_#").addAction(
   async (_, { flowDynamic, gotoFlow }) => {
-    await flowDynamic([
-      {
-        body: "Nuestras referencias en Sombreros 🤠👒",
-        media: "https://801x8zzp-3001.use2.devtunnels.ms/imagen/sombreros.jpg",
-        delay: 0,
-      },
-    ]);
+    console.log("Objeto de URLs:", urls);
+
+    await flowDynamic([sombreros]);
+
     flowDynamicCompleted = true;
 
     // Ejecutar la lógica de addAnswer si flowDynamic ya ha completado
