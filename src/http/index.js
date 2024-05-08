@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -41,7 +42,7 @@ login = (req, res) => {
 // Ruta para autenticar la clave
 authenticate = (req, res) => {
   const providedKey = req.body.key;
-  const correctKey = 'LogaCO.,23'; // Reemplaza 'tu_clave_secreta' con tu clave real
+  const correctKey = 'Clysa.,23'; // Reemplaza 'tu_clave_secreta' con tu clave real
   if (providedKey === correctKey) {
       // Si la clave es correcta, establece el estado de autenticación como verdadero
       authenticated = true;
