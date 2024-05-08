@@ -10,8 +10,8 @@ const chatwoot = new ChatwootClass({
 /**
  *  Flujo para hablar con asesor humano.
  */
-const asesorPreguntas = addKeyword('#').addAnswer([' En un momento uno de nuestros asesores se pondra en contacto contigo'],null, async (_,{ flowDynamic}) => {
-    return await asignarEquipo(dataIn = { team: 2 }, chatwoot)
+const asesorMayor = addKeyword('#').addAnswer([' En un momento uno de nuestros asesores se pondra en contacto contigo'],null, async (_,{ flowDynamic}) => {
+    await asignarEquipo(dataIn = { team: 2 }, chatwoot)
 })
 
-module.exports = asesorPreguntas
+module.exports = asesorMayor

@@ -80,6 +80,7 @@ const asesor = require("./flows/menuPPL/asesor/asesorVentas.flow");
 
 const flowPreguntas = require("./flows/menuPPL/preguntas/preguntas.flow");
 const asesorPreguntas = require("./flows/menuPPL/asesor/asesorPreguntas.flow");
+const asesorMayor = require("./flows/menuPPL/asesor/asesorVentasPorMayor.flow");
 
 
 const { enviarMensajeMultiple } = require('./flows/sendMessage');
@@ -140,7 +141,7 @@ const queue = new Queue({
 
 const main = async () => {
   const adapterDB = new MockAdapter();
-  const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosCatalogo, preciosConjuntos, flowPreguntas , cpCaballeros, ppUnicolor, ppParejas, ppNinios, ppDamas, ppCaballeros, cpUnicolor, cpParejas, cpNinios, cpDamas, cpCaballeros, preguntas, ubicacion, medidas, telas, modosDePago, asesorPreguntas]);
+  const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosCatalogo, preciosConjuntos, flowPreguntas , cpCaballeros, ppUnicolor, ppParejas, ppNinios, ppDamas, ppCaballeros, cpUnicolor, cpParejas, cpNinios, cpDamas, cpCaballeros, preguntas, ubicacion, medidas, telas, modosDePago, asesorPreguntas, asesorMayor]);
   const adapterProvider = createProvider(BaileysProvider);
 
   const bot = await createBot({
