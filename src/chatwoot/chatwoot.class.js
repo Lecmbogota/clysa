@@ -389,6 +389,7 @@ class ChatwootClass {
         }
     }
     assignTeam = async (dataIn) => {
+        console.log("datain assign team: ", dataIn)
         try {
             const payload = {
                 //    "assignee_id": 1,

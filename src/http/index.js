@@ -190,7 +190,6 @@ qrCtrl = (req, res) => {
    * @param {*} res
    */
   chatwootCtrl = async (req, res) => {
-    console.log("chatwootCtrl");
     const body = req.body;
     const attachments = body?.attachments;
     const bot = req.bot;

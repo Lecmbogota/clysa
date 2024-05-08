@@ -154,7 +154,6 @@ const main = async () => {
  
   adapterProvider.on("message", (payload) => {
     queue.enqueue(async () => {
-
       try {
         const attachment = [];
         if (payload?.body.includes("_event_")) {
@@ -169,7 +168,7 @@ const main = async () => {
           await fs.writeFile(pathFile, buffer);
           attachment.push(pathFile);
         }
-        if(debug === true){console.log("payload in ", payload);}
+        
         await handlerMessage(
           {
             phone: payload.from,
@@ -188,8 +187,6 @@ const main = async () => {
 
   bot.on("send_message", (payload) => {
     queue.enqueue(async () => {
-      if(debug === true){console.log("payload out ", payload);}
-
       await handlerMessage(
         {
           phone: payload.numberOrId,
