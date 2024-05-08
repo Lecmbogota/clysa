@@ -402,6 +402,7 @@ class ChatwootClass {
                 body: JSON.stringify(payload)
             })
             const data = await dataFetch.json();
+            console.log("data  to assign team: ", data)
             return data
         } catch (error) {
             //console.error(`[Error assignConversation]`, error)
