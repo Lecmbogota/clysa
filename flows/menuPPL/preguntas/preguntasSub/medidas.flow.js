@@ -1,4 +1,5 @@
 const { addKeyword } = require("@bot-whatsapp/bot");
+const { medida1, medida2, medida3 } = require('../../rutas/rutas')
 
 let flowDynamicCompleted = false;
 
@@ -8,24 +9,9 @@ module.exports = addKeyword("#_/MENU_PANTALONETAS/_#").addAnswer([
 ])
 .addAction(async (_, { gotoFlow, flowDynamic }) => {
 
-  await flowDynamic([
-    {
-      body: "Cuadro de medidas 1",
-      media: "https://801x8zzp-3001.use2.devtunnels.ms/imagen/cuadro1.jpg"
-    },
-  ]);
-  await flowDynamic([
-    {
-      body: "Cuadro de medidas 2",
-      media: "https://801x8zzp-3001.use2.devtunnels.ms/imagen/cuadro2.jpg"
-    },
-  ]);
-  await flowDynamic([
-    {
-      body: "Cuadro de medidas 3",
-      media: "https://801x8zzp-3001.use2.devtunnels.ms/imagen/cuadro3.jpg"
-    },
-  ]);
+  await flowDynamic([medida1]);
+  await flowDynamic([medida2]);
+  await flowDynamic([medida3]);
     // Marcar que flowDynamic ha terminado su ejecución
   flowDynamicCompleted = true;
 
