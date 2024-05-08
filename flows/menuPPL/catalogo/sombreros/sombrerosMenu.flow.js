@@ -1,4 +1,5 @@
 const { addKeyword } = require("@bot-whatsapp/bot");
+const flujoFinal = require('../../../finaliza.flow')
 
 const flowSombrerosMenu = addKeyword("#_/SOMBREROS/_#")
   .addAnswer([])
@@ -12,8 +13,11 @@ const flowSombrerosMenu = addKeyword("#_/SOMBREROS/_#")
       "4️⃣ REALIZAR UN PEDIDO",
       "9️⃣ VOLVER AL MENU PRINCIPAL"
     ],
-    { capture: true },
-    async (ctx, { gotoFlow, fallBack, flowDynamic, state }) => {
+    { capture: true, idle: 36000000 },
+    async (ctx, { gotoFlow, fallBack, flowDynamic, state, inRef }) => {
+      if (ctx?.idleFallBack) {
+        return gotoFlow(flujoFinal);
+      }
       const opcion = parseInt(ctx.body);
       switch (opcion) {
         case 1:

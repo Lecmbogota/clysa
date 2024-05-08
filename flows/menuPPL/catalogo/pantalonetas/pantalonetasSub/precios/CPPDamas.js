@@ -1,5 +1,5 @@
 const { addKeyword } = require('@bot-whatsapp/bot');
-
+const flujoFinal = require('../../../../../finaliza.flow')
 
 module.exports = addKeyword('#_/MENU_PRECIOS_PANTALONETAS/_#').addAnswer(
   [
@@ -20,7 +20,11 @@ module.exports = addKeyword('#_/MENU_PRECIOS_PANTALONETAS/_#').addAnswer(
   '8️⃣ HABLAR CON UN ASESOR',
   '0️⃣ VOLVER AL MENU ANTERIOR',
   '9️⃣ VOLVER AL MENU PRINCIPAL'
-], {capture: true }, async (ctx,{gotoFlow,}) => {
+], {capture: true, idle: 36000000 }, async (ctx,{gotoFlow, inRef}) => {
+
+  if (ctx?.idleFallBack) {
+    return gotoFlow(flujoFinal);
+  }
 
   const opcion = parseInt(ctx.body)
   switch(opcion) {

@@ -1,5 +1,5 @@
 const { addKeyword } = require('@bot-whatsapp/bot');
-
+const flujoFinal = require('../../finaliza.flow')
 /**
  *  Flujo de catalogo
  */
@@ -12,7 +12,12 @@ const flowPreguntas = addKeyword('#_/CATALOGO/_# ')
     '4️⃣ TELAS',
     '8️⃣ HABLAR CON UN ASESOR',
     '9️⃣ VOLVER AL MENU PRINCIPAL'
-], {capture: true }, async (ctx,{fallBack, gotoFlow}) => {
+], {capture: true, idle: 36000000 }, async (ctx,{fallBack, gotoFlow, inRef}) => {
+
+  if (ctx?.idleFallBack) {
+    return gotoFlow(flujoFinal);
+  }
+
     const opcion = parseInt(ctx.body)
     switch(opcion) {
         case 1:
