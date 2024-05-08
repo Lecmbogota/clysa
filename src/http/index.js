@@ -193,7 +193,6 @@ qrCtrl = (req, res) => {
     const body = req.body;
     const attachments = body?.attachments;
     const bot = req.bot;
-    //console.log("body: ", body)
     try {
       
       
@@ -203,9 +202,7 @@ qrCtrl = (req, res) => {
         body?.event === "conversation_updated")
         {
           const phone = body?.meta?.sender?.phone_number?.replace("+", "");
-          
           const mapperAttributes = body?.changed_attributes;
-          console.log("mapperAttributes", mapperAttributes);
 
           // Itera sobre los atributos cambiados
           for (const attribute of mapperAttributes) {
@@ -215,15 +212,16 @@ qrCtrl = (req, res) => {
               break; // Una vez encontrado, sal del bucle
             }
           }
-          //console.log("ID del Team: ",currentValueOfTeamId)
         if (currentValueOfTeamId === 1 || currentValueOfTeamId === 2  || currentValueOfTeamId === 3) {
           
           // Agrega el número de teléfono a la lista dinámica
+          console.log(`✔ ✔ se agrega el número ${phone} al team ${currentValueOfTeamId}`);
           console.log(`✔ ✔ se agrega el número ${phone} de teléfono a la lista Negra`);
           bot.dynamicBlacklist.add(phone);
         } 
         if ( currentValueOfTeamId === 4) {
           // Remueve el número de teléfono de la lista dinámica
+          console.log(`❌❌ se remueve el número ${phone} al team ${currentValueOfTeamId}`);
           console.log(`❌❌ se remueve el número ${phone} de teléfono de la lista Negra`);
           bot.dynamicBlacklist.remove(phone);
 
