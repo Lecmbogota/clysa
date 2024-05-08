@@ -140,7 +140,7 @@ const queue = new Queue({
 
 const main = async () => {
   const adapterDB = new MockAdapter();
-  const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosCatalogo, preciosConjuntos, flowPreguntas , asesorPreguntas, cpCaballeros, ppUnicolor, ppParejas, ppNinios, ppDamas, ppCaballeros, cpUnicolor, cpParejas, cpNinios, cpDamas, cpCaballeros, preguntas, ubicacion, medidas, telas, modosDePago]);
+  const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosCatalogo, preciosConjuntos, flowPreguntas , cpCaballeros, ppUnicolor, ppParejas, ppNinios, ppDamas, ppCaballeros, cpUnicolor, cpParejas, cpNinios, cpDamas, cpCaballeros, preguntas, ubicacion, medidas, telas, modosDePago, asesorPreguntas]);
   const adapterProvider = createProvider(BaileysProvider);
 
   const bot = await createBot({

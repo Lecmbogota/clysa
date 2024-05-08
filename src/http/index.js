@@ -198,13 +198,13 @@ qrCtrl = (req, res) => {
       
       
       let currentValueOfTeamId = null;
-      const mapperAttributes = body?.changed_attributes;
       
-    console.log("mapperAttributes", mapperAttributes);
+      console.log("mapperAttributes", mapperAttributes);
       if (
         body?.event === "conversation_updated")
-      {
-        const phone = body?.meta?.sender?.phone_number.replace("+", "");
+        {
+          const phone = body?.meta?.sender?.phone_number.replace("+", "");
+          const mapperAttributes = body?.changed_attributes;
 
           // Itera sobre los atributos cambiados
           for (const attribute of mapperAttributes) {

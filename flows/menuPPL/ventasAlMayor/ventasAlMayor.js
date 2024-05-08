@@ -19,11 +19,11 @@ const flowCatalogo = addKeyword("#_/CATALOGO/_# ")
       "*PANTALONETAS UNICOLOR Dama y Caballero*",
       " ",
       "🟡 50 X $625.000",
-    ], { capture: true}, async (ctx) => {
-      
-    }).addAction(async (_, { gotoFlow }) => {
-    return await gotoFlow(require('./menuPPL/asesor/asesorVentas.flow'))
+    ],
+    null,
+    async (gotoFlow) => {
+      await gotoFlow(require("../asesor/asesorVentasPorMayor.flow"));
     }
-)
+  )
 
 module.exports = flowCatalogo;
