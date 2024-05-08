@@ -75,8 +75,8 @@ module.exports = {
   aventura,
   quickSilver,
   surfing,
-  medida1,
-  medida2,
-  medida3,
+  medidas1,
+  medidas2,
+  medidas3,
   telas
 };
