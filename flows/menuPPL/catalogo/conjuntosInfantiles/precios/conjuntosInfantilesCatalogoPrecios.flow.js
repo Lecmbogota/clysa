@@ -26,16 +26,16 @@ module.exports = addKeyword("#_/MENU_PRECIOS_PANTALONETAS/_#")
       const opcion = parseInt(ctx.body);
       switch (opcion) {
         case 1:
-          await gotoFlow(require("../../../../../pedido.flow"));
+          await gotoFlow(require("../../../../pedido.flow"));
           break;
         case 8:
-          await gotoFlow(require("../../../../asesor/asesorVentas.flow"));
+          await gotoFlow(require("../../../asesor/asesorVentas.flow"));
           break;
         case 0:
-          await gotoFlow(require("../../conjuntosInfantiles.flow"));
+          await gotoFlow(require("../../catalogo.flow"));
           break;
         case 9:
-          await gotoFlow(require("../../../../../bienvenida.flow"));
+          await gotoFlow(require("../../../../bienvenida.flow"));
           break;
         default:
           await fallBack(

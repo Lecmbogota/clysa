@@ -50,6 +50,10 @@ const ppNinios = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/
 const ppParejas = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/precios/CPPParejas");
 const ppUnicolor = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/precios/CPPUnicolor");
 
+const pantalonetas = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetas.flow");
+
+const ppCaballeros = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/precios/CPPCaballero");
+
 // Flujos de Finaliza Conversacion
 const finaliza = require("./flows/finaliza.flow");
 

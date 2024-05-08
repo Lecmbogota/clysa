@@ -36,7 +36,7 @@ const flowCatalogo = addKeyword('#_/CATALOGO/_# ')
               body: "¡Excelente! Si estás buscando conjuntos infantiles, aquí tienes algunas opciones que podrían interesarte 👚🩳",
             },
           ]);
-            await gotoFlow(require('./conjuntosInfantiles/conjuntosInfantiles.flow'))
+            await gotoFlow(require('./conjuntosInfantiles/catalogo/conjuntosInfantilesCatalogo.flow'))
           break;
         case 9:
             await gotoFlow(require('../../bienvenida.flow'))
