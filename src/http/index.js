@@ -199,7 +199,7 @@ qrCtrl = (req, res) => {
       let currentValueOfTeamId = null;
       const mapperAttributes = body?.changed_attributes;
       
-console.log("body", body.labels);
+//console.log("body", body.labels);
       if (
         body?.event === "conversation_updated")
       {
