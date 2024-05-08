@@ -7,7 +7,7 @@ const flowSombrerosMenu = addKeyword("#_/SOMBREROS/_#")
       "👇🏼 Por favor, selecciona una categoría para ver mas detalles:",
       " ",
       "1️⃣ QUICKSILVER",
-      "2️⃣ SURF",
+      "2️⃣ SURFING",
       "3️⃣ AVENTURA",
       "4️⃣ REALIZAR UN PEDIDO",
       "9️⃣ VOLVER AL MENU PRINCIPAL",
@@ -29,7 +29,7 @@ const flowSombrerosMenu = addKeyword("#_/SOMBREROS/_#")
           break;
         case 2:
           await flowDynamic([
-            "PRECIOS DE SOMBREROS SURF 🏄🏼‍♀️",
+            "PRECIOS DE SOMBREROS SURFING 🏄🏼‍♀️",
             "🔵 Unidad $65.000",
             "🔵 2 unidades $118.000 (59.000)",
             "🔵 6 unidades o mas $55.000",
