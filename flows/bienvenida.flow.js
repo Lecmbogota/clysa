@@ -1,8 +1,6 @@
-require("dotenv").config();
 const { addKeyword, EVENTS } = require('@bot-whatsapp/bot')
 const catalogo = require('./menuPPL/catalogo/catalogo.flow')
 const flujoFinal = require('./finaliza.flow')
-const idleTime = process.env.IDLE_TIME
 /**
  *  Flujo de bienvenida
  */
@@ -19,7 +17,7 @@ module.exports = addKeyword('#_MENU_PRINCIPAL_#')
         ' ',
         '(Introduce el número de la opción)'
     ],
-    { capture: true, idle: idleTime },
+    { capture: true, idle: 10000 },
     async(ctx, { fallBack, gotoFlow, inRef  }) => {
       console.log(ctx)
       if (ctx?.idleFallBack) {
