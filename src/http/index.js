@@ -214,7 +214,7 @@ qrCtrl = (req, res) => {
               break; // Una vez encontrado, sal del bucle
             }
           }
-          console.log("ID del Team: ",currentValueTeamId)
+          console.log("ID del Team: ",currentValueOfTeamId)
         if (currentValueOfTeamId === 1 || currentValueOfTeamId === 2  || currentValueOfTeamId === 3) {
           
           // Agrega el número de teléfono a la lista dinámica
