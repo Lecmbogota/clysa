@@ -198,38 +198,37 @@ qrCtrl = (req, res) => {
       
       let currentValueOfTeamId = null;
       
-      if (
-        body?.event === "conversation_updated")
-        {
-          const phone = body?.meta?.sender?.phone_number?.replace("+", "");
-          const mapperAttributes = body?.changed_attributes;
-
-          // Itera sobre los atributos cambiados
-          for (const attribute of mapperAttributes) {
+      if (body?.event === "conversation_updated") {
+        const phone = body?.meta?.sender?.phone_number?.replace("+", "");
+        const mapperAttributes = body?.changed_attributes;
+    
+        let currentValueOfTeamId;
+    
+        // Itera sobre los atributos cambiados
+        for (const attribute of mapperAttributes) {
             // Verifica si el nodo team_id está presente
-            if (attribute.hasOwnProperty("team_id")) {
-              currentValueOfTeamId = attribute?.team_id?.current_value;
-              break; // Una vez encontrado, sal del bucle
+            if (attribute?.team_id !== undefined) {
+                currentValueOfTeamId = attribute?.team_id?.current_value;
+                break; // Una vez encontrado, sal del bucle
             }
-          }
-        if (currentValueOfTeamId === 1 || currentValueOfTeamId === 2  || currentValueOfTeamId === 3) {
-          
-          // Agrega el número de teléfono a la lista dinámica
-          console.log(`✔ ✔ se agrega el número ${phone} al team ${currentValueOfTeamId}`);
-          console.log(`✔ ✔ se agrega el número ${phone} de teléfono a la lista Negra`);
-          await bot.dynamicBlacklist.add(phone);
-        } 
-        if ( currentValueOfTeamId === 4) {
-          // Remueve el número de teléfono de la lista dinámica
-          console.log(`❌❌ se remueve el número ${phone} del team ${currentValueOfTeamId}`);
-          console.log(`❌❌ se remueve el número ${phone} de teléfono de la lista Negra`);
-          await bot.dynamicBlacklist.remove(phone);
-
         }
+    
+        if (currentValueOfTeamId === 1 || currentValueOfTeamId === 2 || currentValueOfTeamId === 3) {
+            // Agrega el número de teléfono a la lista dinámica y a la lista negra
+            console.log(`✔ ✔ se agrega el número ${phone} al team ${currentValueOfTeamId}`);
+            console.log(`✔ ✔ se agrega el número ${phone} de teléfono a la lista Negra`);
+            bot.dynamicBlacklist.add(phone);
+        } else if (currentValueOfTeamId === 4) {
+            // Remueve el número de teléfono de la lista dinámica y de la lista negra
+            console.log(`❌❌ se remueve el número ${phone} del team ${currentValueOfTeamId}`);
+            console.log(`❌❌ se remueve el número ${phone} de teléfono de la lista Negra`);
+            bot.dynamicBlacklist.remove(phone);
+        }
+    
         res.send("ok");
         return;
-      }
-
+    }
+    
       const checkIfMessage =
         body?.private == false &&
         body?.event == "message_created" &&
