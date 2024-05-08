@@ -82,7 +82,7 @@ class ChatwootClass {
             return data.payload[0]
 
         } catch (error) {
-            console.error(`[Error al buscar el numero]`, error)
+            //console.error(`[Error al buscar el numero]`, error)
         }
     }
 
@@ -112,11 +112,11 @@ class ChatwootClass {
             })
 
             const response = await dataFetch.json()
-        console.log(`[Contacto creadoooooooooooooooo]`, response.payload.contact);
+        
             return response.payload.contact
 
         } catch (error) {
-            console.error(`[Error createContact]`, error)
+            //console.error(`[Error createContact]`, error)
             return
         }
     }
@@ -132,16 +132,13 @@ class ChatwootClass {
             dataIn.from = this.formatNumber(dataIn.from)
             const getContact = await this.findContact(dataIn.from)
             if (!getContact) {
-                console.log(`[Contacto no encontrado]`, getContact);
-                console.log(`[Creando contacto]`, dataIn);
                 const contact = await this.createContact(dataIn)
-                console.log(`[Contacto creado]`, contact);
                 return contact
             }
             return getContact
 
         } catch (error) {
-            console.error(`[Error al buscar o crear el contacto]`, error)
+            //console.error(`[Error al buscar o crear el contacto]`, error)
             return
         }
     }
@@ -174,7 +171,7 @@ class ChatwootClass {
             const data = await dataFetch.json();
             return data
         } catch (error) {
-            console.error(`[Error createConversation]`, error)
+            //console.error(`[Error createConversation]`, error)
             return
         }
     }
@@ -214,7 +211,7 @@ class ChatwootClass {
             const data = await dataFetch.json();
             return data.payload
         } catch (error) {
-            console.error(`[Error findConversation]`, error)
+            //console.error(`[Error findConversation]`, error)
             return
         }
     }
@@ -237,7 +234,7 @@ class ChatwootClass {
             }
             return getId[0]
         } catch (error) {
-            console.error(`[Error findOrCreateInbox]`, error)
+            //console.error(`[Error findOrCreateInbox]`, error)
             return
         }
     }
@@ -276,7 +273,7 @@ class ChatwootClass {
 
             return data
         } catch (error) {
-            console.error(`[Error createMessage]`, error)
+            //console.error(`[Error createMessage]`, error)
             return
         }
     }
@@ -308,7 +305,7 @@ class ChatwootClass {
             return data;
 
         } catch (error) {
-            console.error(`[Error createInbox]`, error)
+            //console.error(`[Error createInbox]`, error)
             return
         }
     }
@@ -339,7 +336,7 @@ class ChatwootClass {
 
             return checkIfExist;
         } catch (error) {
-            console.error(`[Error findInbox]`, error)
+            //console.error(`[Error findInbox]`, error)
             return
         }
     }
@@ -360,7 +357,7 @@ class ChatwootClass {
             return getInbox
 
         } catch (error) {
-            console.error(`[Error findOrCreateInbox]`, error)
+            //console.error(`[Error findOrCreateInbox]`, error)
             return
         }
     }
@@ -387,7 +384,7 @@ class ChatwootClass {
             const data = await dataFetch.json();
             return data
         } catch (error) {
-            console.error(`[Error assignConversation]`, error)
+            //console.error(`[Error assignConversation]`, error)
             return
         }
     }
@@ -406,7 +403,7 @@ class ChatwootClass {
             const data = await dataFetch.json();
             return data
         } catch (error) {
-            console.error(`[Error assignConversation]`, error)
+            //console.error(`[Error assignConversation]`, error)
             return
         }
     }

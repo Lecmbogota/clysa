@@ -66,7 +66,6 @@ qrCtrl = (req, res) => {
 
 }
 
-
   // CONTROLADORES PARA ENVIAR ARCHIVOS DE TIPO MULTIMEDIA EN EL CHATBOT
   /**
    *  este es el controlador para mostar el pdf
