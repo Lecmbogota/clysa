@@ -19,11 +19,9 @@ const flowCatalogo = addKeyword("#_/CATALOGO/_# ")
       "*PANTALONETAS UNICOLOR Dama y Caballero*",
       " ",
       "🟡 50 X $625.000",
-    ],
-    null,
-    async (gotoFlow) => {
-      await gotoFlow(require("../asesor/asesorVentasPorMayor.flow"));
+    ]).addAction(async (_, { gotoFlow }) => {
+    return await gotoFlow(require('./menuPPL/asesor/asesorVentas.flow'))
     }
-  );
+)
 
 module.exports = flowCatalogo;
