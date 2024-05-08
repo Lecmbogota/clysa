@@ -34,7 +34,7 @@ const catalogo = require("./flows/menuPPL/catalogo/catalogo.flow");
 
 // Flujos de Catalogo Submenus
 
-const conjuntosInfantiles = require("./flows/menuPPL/catalogo/conjuntosInfantiles/conjuntosInfantiles.flow");
+//const conjuntosInfantiles = require("./flows/menuPPL/catalogo/conjuntosInfantiles/conjuntosInfantiles.flow");
 
 // flujos Pantalonetas 
 const pantalonetas = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetas.flow");
@@ -50,9 +50,9 @@ const ppNinios = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/
 const ppParejas = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/precios/CPPParejas");
 const ppUnicolor = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/precios/CPPUnicolor");
 
-const pantalonetas = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetas.flow");
+const conjuntosCatalogo = require("./flows/menuPPL/catalogo/conjuntosInfantiles/catalogo/conjuntosInfantilesCatalogo.flow");
 
-const ppCaballeros = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/precios/CPPCaballero");
+const preciosConjuntos = require("./flows/menuPPL/catalogo/conjuntosInfantiles/precios/conjuntosInfantilesCatalogoPrecios.flow");
 
 // Flujos de Finaliza Conversacion
 const finaliza = require("./flows/finaliza.flow");
@@ -140,7 +140,7 @@ const queue = new Queue({
 
 const main = async () => {
   const adapterDB = new MockAdapter();
-  const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosInfantiles, flowPreguntas , asesorPreguntas, cpCaballeros, ppUnicolor, ppParejas, ppNinios, ppDamas, ppCaballeros, cpUnicolor, cpParejas, cpNinios, cpDamas, cpCaballeros, preguntas, ubicacion, medidas, telas, modosDePago]);
+  const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosCatalogo, preciosConjuntos, flowPreguntas , asesorPreguntas, cpCaballeros, ppUnicolor, ppParejas, ppNinios, ppDamas, ppCaballeros, cpUnicolor, cpParejas, cpNinios, cpDamas, cpCaballeros, preguntas, ubicacion, medidas, telas, modosDePago]);
   const adapterProvider = createProvider(BaileysProvider);
 
   const bot = await createBot({
