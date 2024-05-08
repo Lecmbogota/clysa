@@ -1,5 +1,6 @@
 const { addKeyword } = require("@bot-whatsapp/bot");
-import { sombreros } from '../../rutas/rutas';
+const { sombreros } = require('../../rutas/rutas');
+
 
 let flowDynamicCompleted = false;
 
