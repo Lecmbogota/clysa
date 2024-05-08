@@ -11,8 +11,7 @@ const flowPreguntas = addKeyword('#_/CATALOGO/_# ')
     '3️⃣ CUADRO DE MEDIDAS',
     '4️⃣ TELAS',
     '8️⃣ HABLAR CON UN ASESOR',
-    '9️⃣ VOLVER AL MENU PRINCIPAL',
-    '0️⃣ FINALIZAR'
+    '9️⃣ VOLVER AL MENU PRINCIPAL'
 ], {capture: true }, async (ctx,{fallBack, gotoFlow}) => {
     const opcion = parseInt(ctx.body)
     switch(opcion) {
@@ -33,9 +32,6 @@ const flowPreguntas = addKeyword('#_/CATALOGO/_# ')
           break;
         case 9:
             await gotoFlow(require('../../bienvenida.flow'))
-          break;
-        case 0:
-            await gotoFlow(require('../../finaliza.flow'))
           break;
         default:
             await fallBack(`⛔ Haz marcado una opcion Invalida, Intenta de nuevo ⛔`)

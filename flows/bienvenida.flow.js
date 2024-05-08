@@ -14,7 +14,6 @@ module.exports = addKeyword('#_MENU_PRINCIPAL_#')
         '2️⃣ PREGUNTAS FRECUENTES',
         '3️⃣ VENTAS AL POR MAYOR',
         '8️⃣ HABLAR CON UN ASESOR',
-        '0️⃣ FINALIZAR',
         ' ',
         '(Introduce el número de la opción)'
     ],
@@ -33,9 +32,6 @@ module.exports = addKeyword('#_MENU_PRINCIPAL_#')
           break;
         case 8:
             await gotoFlow(require('./menuPPL/asesor/asesorPreguntas.flow'))
-          break;
-        case 0:
-            await gotoFlow(require('../flows/finaliza.flow'))
           break;
         default:
             await fallBack(`⛔ Haz marcado una opcion Invalida, Intenta de nuevo ⛔`)

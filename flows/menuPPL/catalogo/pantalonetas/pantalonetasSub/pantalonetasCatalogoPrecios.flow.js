@@ -36,8 +36,7 @@ module.exports = addKeyword('#_/MENU_PRECIOS_PANTALONETAS/_#').addAnswer(
   '1️⃣ VER CATALOGOS',
   '2️⃣ REALIZAR UN PEDIDO',
   '3️⃣ HABLAR CON UN ASESOR',
-  '8️⃣ VOLVER AL MENU PRINCIPAL',
-  '0️⃣ FINALIZAR'
+  '8️⃣ VOLVER AL MENU PRINCIPAL'
 ], {capture: true }, async (ctx,{gotoFlow,}) => {
 
   const opcion = parseInt(ctx.body)
@@ -53,9 +52,6 @@ module.exports = addKeyword('#_/MENU_PRECIOS_PANTALONETAS/_#').addAnswer(
         break;
       case 8:
           await gotoFlow(require('../../../../bienvenida.flow'))
-        break;
-      case 0:
-          await gotoFlow(require('../../../../finaliza.flow'))
         break;
       default:
           await fallBack(`⛔ Haz marcado una opcion Invalida, Intenta de nuevo ⛔`)

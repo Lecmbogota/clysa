@@ -10,8 +10,7 @@ const flowSombrerosMenu = addKeyword("#_/SOMBREROS/_#")
       "2️⃣ SURFING",
       "3️⃣ AVENTURA",
       "4️⃣ REALIZAR UN PEDIDO",
-      "9️⃣ VOLVER AL MENU PRINCIPAL",
-      "0️⃣ FINALIZAR",
+      "9️⃣ VOLVER AL MENU PRINCIPAL"
     ],
     { capture: true },
     async (ctx, { gotoFlow, fallBack, flowDynamic, state }) => {
@@ -50,9 +49,6 @@ const flowSombrerosMenu = addKeyword("#_/SOMBREROS/_#")
           break;
         case 9:
           await gotoFlow(require("../../../bienvenida.flow"));
-          break;
-        case 0:
-          await gotoFlow(require("../../../finaliza.flow"));
           break;
         default:
           await fallBack(

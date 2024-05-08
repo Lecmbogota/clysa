@@ -8,8 +8,7 @@ const flowCatalogo = addKeyword('1').addAnswer('📘 CATALOGO DE PRODUCTOS')
     '1️⃣ SOMBREROS',
     '2️⃣ PANTALONETAS',
     '3️⃣ CONJUNTOS INFANTILES',
-    '4️⃣ VOLVER AL MENU ANTERIOR',
-    '5️⃣ FINALIZAR'
+    '4️⃣ VOLVER AL MENU ANTERIOR'
 ], {capture: true }, async (ctx,{gotoFlow}) => {
 
     const numero = ctx.body

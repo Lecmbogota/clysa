@@ -8,8 +8,7 @@ module.exports = addKeyword('#_/MENU_PRINCIPAL_PANTALONETAS/_#')
     '👇🏼 MENU_PANTALONETAS',
     '1️⃣ VER CATALOGOS',
     '2️⃣ VER PRECIOS',
-    '9️⃣ VOLVER AL MENU PRINCIPAL',
-    '0️⃣ FINALIZAR'
+    '9️⃣ VOLVER AL MENU PRINCIPAL'
 ], {capture: true }, async (ctx,{gotoFlow, flowDynamic}) => {
 
     const opcion = parseInt(ctx.body)
@@ -35,9 +34,6 @@ module.exports = addKeyword('#_/MENU_PRINCIPAL_PANTALONETAS/_#')
           break;
         case 9:
             await gotoFlow(require('../../../bienvenida.flow'))
-          break;
-        case 0:
-            await gotoFlow(require('../../../finaliza.flow'))
           break;
         default:
             await fallBack(`⛔ Haz marcado una opcion Invalida, Intenta de nuevo ⛔`)

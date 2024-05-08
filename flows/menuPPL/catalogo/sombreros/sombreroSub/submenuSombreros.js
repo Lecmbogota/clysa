@@ -5,8 +5,7 @@ module.exports = addKeyword("#_/SUB_MENU_SOMBREROS/_#").addAnswer(
     "👇🏼 Selecciona una opcion",
     "1️⃣ VER OTRO PRODUCTO",
     "2️⃣ REALIZAR PEDIDO",
-    "9️⃣ HABLAR CON UN ASESOR",
-    "0️⃣ FINALIZAR",
+    "9️⃣ HABLAR CON UN ASESOR"
   ],
   { capture: true, delay: 1000 },
   async (ctx, { gotoFlow, fallBack }) => {
@@ -20,9 +19,6 @@ module.exports = addKeyword("#_/SUB_MENU_SOMBREROS/_#").addAnswer(
         break;
       case 9:
         await gotoFlow(require("../../../asesor/asesorVentas.flow"));
-        break;
-      case 0:
-        await gotoFlow(require("../../../../finaliza.flow"));
         break;
       default:
         await fallBack(
