@@ -5,9 +5,8 @@ const { addKeyword } = require('@bot-whatsapp/bot');
  */
 const flowCatalogo = addKeyword('#_/CATALOGO/_# ')
 .addAnswer([
-    '*CATALOGO DE PRODUCTOS*',
+    '👇🏼 *_SELECCIONA UNA CATEGORIA DE NUESTRO CATALOGO_*',
     ' ',
-    '👇🏼 *_Selecciona una categoria_*',
     '1️⃣ SOMBREROS',
     '2️⃣ PANTALONETAS',
     '3️⃣ CONJUNTOS INFANTILES',

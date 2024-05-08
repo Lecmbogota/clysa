@@ -45,17 +45,17 @@ module.exports = addKeyword('#_/MENU_PRECIOS_PANTALONETAS/_#').addAnswer(
           await gotoFlow(require('./pantalonetasCatalogo.flow'))
         break;
       case 2:
-          await gotoFlow(require('../../../../pedido.flow'))
+          await gotoFlow(require('../../../../../pedido.flow'))
         break;
       case 3:
-          await gotoFlow(require('../../../asesor/asesorVentas.flow'))
+          await gotoFlow(require('../../../../asesor/asesorVentas.flow'))
         break;
       case 8:
-          await gotoFlow(require('../../../../bienvenida.flow'))
+          await gotoFlow(require('../../../../../bienvenida.flow'))
         break;
       default:
           await fallBack(`⛔ Haz marcado una opcion Invalida, Intenta de nuevo ⛔`)
-          await gotoFlow(require('./pantalonetasCatalogoMenu.flow'))
+          await gotoFlow(require('../pantalonetasCatalogoMenu.flow'))
         break;
     }
 }) 

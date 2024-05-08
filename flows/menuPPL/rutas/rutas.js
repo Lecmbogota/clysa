@@ -64,7 +64,11 @@ const telas = {
   delay: 0,
 };
 
-
+const ConjuntosInfantiles = {
+  body: "Catalogo Conjuntos Infantiles",
+  media: `${url}/pdf/CLYSA-Conjuntos-Infantiles.pdf`,
+  delay: 0,
+};
 
 module.exports = {
   Caballeros,
@@ -78,5 +82,6 @@ module.exports = {
   medidas1,
   medidas2,
   medidas3,
-  telas
+  telas,
+  ConjuntosInfantiles
 };

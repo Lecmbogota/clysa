@@ -18,7 +18,7 @@ module.exports = addKeyword('#_/MENU_PRINCIPAL_CONJUNTOS_INFANTILES/_#')
               body: "¡Excelente! Si estás buscando Conjuntos Infantiles, aquí tienes algunas opciones que podrían interesarte 🛍",
             },
           ]);
-            await gotoFlow(require('./conjuntosInfantilesSub/conjuntosInfantilesCatalogo.flow'))
+            await gotoFlow(require('./conjuntosInfantilesSub/catalogo/conjuntosInfantilesCatalogo.flow'))
           break;
         case 2:
           await flowDynamic([
@@ -26,7 +26,7 @@ module.exports = addKeyword('#_/MENU_PRINCIPAL_CONJUNTOS_INFANTILES/_#')
               body: "¡ Excelente! Te comparto el listado de precios de las Conjuntos Infantiles 🛍",
             },
           ]);
-            await gotoFlow(require('./conjuntosInfantilesSub/conjuntosInfantilesCatalogoPrecios.flow'))
+            await gotoFlow(require('./conjuntosInfantilesSub/precios/conjuntosInfantilesCatalogoPrecios.flow'))
           break;
         case 8:
             await gotoFlow(require('../../asesor/asesorVentas.flow'))

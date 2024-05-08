@@ -15,65 +15,62 @@ const MockAdapter = require("@bot-whatsapp/database/mock");
 const ServerHttp = require("./src/http");
 const ChatwootClass = require("./src/chatwoot/chatwoot.class");
 const moment = require("moment-timezone");
+const {
+  // GENERAL
+  bienvenida, // ok
+  finaliza, // ok
+  pedido, // ok
 
+  // HORARIO
+  horarioDef, // ok
+  fueraHorario, // ok
+
+  // MUNU PRINCIPAL
+  catalogo,
+  flowPreguntas,
+  asesorVentasPorMayor,
+
+  //CATALOGO
+  pantalonetas,
+  sombreros,
+  conjuntosInfantiles,
+
+  // SOMBREROS
+  quicksilver,
+  surf,
+  aventura,
+  submenusombreros,
+  sombrerosMenu,
+
+  // PANTALONETAS
+  PantalonetaCCaballero,
+  PantalonetaCDamas,
+  PantalonetaCParejas,
+  PantalonetaCUnicolor,
+  PantalonetaCNinios,
+  pantalonetaPCaballeros,
+  pantalonetaPDamas,
+  pantalonetaPParejas,
+  pantalonetaPUnicolor,
+  pantalonetaPNinios,
+
+  // CONJUNTOS INFANTILES
+  conjuntosInfantilesCatalogo,
+  conjuntosInfantilesPrecios,
+
+  //ASESORES
+  asesor,
+  asesorPreguntas,
+
+  preguntas,
+  ubicacion,
+  medidas,
+  telas,
+  modosDePago,
+} = require("./flowColletions");
 
 // Activar debug
 const debug = process.env.DEBUG;
-
-// Horarios de Atencion
-const horarioDef = require("./horarios/horarios");
-
-// Flujos de Bienvenida
-const bienvenida = require("./flows/bienvenida.flow");
-
-// Flujo fuera de Horario
-const fueraHorario = require("./horarios/fueraDeHorario.flow");
-
-// Flujos de Catalogo
-const catalogo = require("./flows/menuPPL/catalogo/catalogo.flow");
-
-// Flujos de Catalogo Submenus
-
-const conjuntosInfantiles = require("./flows/menuPPL/catalogo/conjuntosInfantiles/conjuntosInfantiles.flow");
-
-// flujos Pantalonetas 
-const pantalonetas = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetas.flow");
-const pantalonetasSub = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/pantalonetasCatalogo.flow");
-const pantalonetasMenu = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/pantalonetasCatalogoMenu.flow");
-const pantalonetasPrecios = require("./flows/menuPPL/catalogo/pantalonetas/pantalonetasSub/pantalonetasCatalogoPrecios.flow");
-
-
-
-// Flujos de Finaliza Conversacion
-const finaliza = require("./flows/finaliza.flow");
-
-// Flujos de Sombreros
-const flowSombreros = require("./flows/menuPPL/catalogo/sombreros/sombreros.flow");
-const submenusombreros = require("./flows/menuPPL/catalogo/sombreros/sombreroSub/submenuSombreros");
-const quicksilver = require("./flows/menuPPL/catalogo/sombreros/sombreroSub/quicksilver.flow");
-const surf = require("./flows/menuPPL/catalogo/sombreros/sombreroSub/surf.flow");
-const aventura = require("./flows/menuPPL/catalogo/sombreros/sombreroSub/aventura.flow");
-const sombrerosMenu = require("./flows/menuPPL/catalogo/sombreros/sombrerosMenu.flow");
-
-// Flujos de preguntas
-const preguntas = require("./flows/menuPPL/preguntas/preguntas.flow");
-const ubicacion = require("./flows/menuPPL/preguntas/preguntasSub/ubicacion.flow");
-const medidas = require("./flows/menuPPL/preguntas/preguntasSub/medidas.flow");
-const telas = require("./flows/menuPPL/preguntas/preguntasSub/telas.flow");
-const modosDePago = require("./flows/menuPPL/preguntas/preguntasSub/metodosDePago.flow");
-
-// Flujos de pedido
-const pedido = require("./flows/pedido.flow");
-
-// Flujos de Asesor Humano
-const asesor = require("./flows/menuPPL/asesor/asesorVentas.flow");
-
-const flowPreguntas = require("./flows/menuPPL/preguntas/preguntas.flow");
-const asesorPreguntas = require("./flows/menuPPL/asesor/asesorPreguntas.flow");
-
-
-const { enviarMensajeMultiple } = require('./flows/sendMessage');
-
 
 const { handlerMessage } = require("./src/chatwoot");
 
@@ -104,15 +101,15 @@ function validarHorarioDeAtencion() {
   }
 }
 
-const flowFiltroHorario = addKeyword(EVENTS.WELCOME).addAnswer('👋 Hola, Gracias por comunicarte con CLYSA')
-.addAction(async (ctx, { gotoFlow}) => {
+const flowFiltroHorario = addKeyword(EVENTS.WELCOME)
+  .addAnswer("👋 Hola, Gracias por comunicarte con CLYSA")
+  .addAction(async (ctx, { gotoFlow }) => {
     if (validarHorarioDeAtencion()) {
       gotoFlow(bienvenida);
     } else {
       gotoFlow(fueraHorario);
     }
-  }
-);
+  });
 
 const serverHttp = new ServerHttp(PORT);
 
@@ -122,7 +119,6 @@ const chatwoot = new ChatwootClass({
   endpoint: process.env.CHATWOOT_ENDPOINT,
 });
 
-
 const queue = new Queue({
   concurrent: 1,
   interval: 500,
@@ -130,7 +126,59 @@ const queue = new Queue({
 
 const main = async () => {
   const adapterDB = new MockAdapter();
-  const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosInfantiles, flowPreguntas , asesorPreguntas, pantalonetasSub, pantalonetasMenu, pantalonetasPrecios , preguntas, ubicacion, medidas, telas, modosDePago]);
+  const adapterFlow = createFlow([
+      // GENERAL
+  bienvenida, // ok
+  finaliza, // ok
+  pedido, // ok
+
+  // HORARIO
+  horarioDef, // ok
+  fueraHorario, // ok
+
+  // MUNU PRINCIPAL
+  catalogo,
+  flowPreguntas,
+  asesorVentasPorMayor,
+
+  //CATALOGO
+  pantalonetas,
+  sombreros,
+  conjuntosInfantiles,
+
+  // SOMBREROS
+  quicksilver,
+  surf,
+  aventura,
+  submenusombreros,
+  sombrerosMenu,
+
+  // PANTALONETAS
+  PantalonetaCCaballero,
+  PantalonetaCDamas,
+  PantalonetaCParejas,
+  PantalonetaCUnicolor,
+  PantalonetaCNinios,
+  pantalonetaPCaballeros,
+  pantalonetaPDamas,
+  pantalonetaPParejas,
+  pantalonetaPUnicolor,
+  pantalonetaPNinios,
+
+  // CONJUNTOS INFANTILES
+  conjuntosInfantilesCatalogo,
+  conjuntosInfantilesPrecios,
+
+  //ASESORES
+  asesor,
+  asesorPreguntas,
+
+  preguntas,
+  ubicacion,
+  medidas,
+  telas,
+  modosDePago,
+  ]);
   const adapterProvider = createProvider(BaileysProvider);
 
   const bot = await createBot({
@@ -141,10 +189,8 @@ const main = async () => {
 
   serverHttp.initialization(bot);
 
- 
   adapterProvider.on("message", (payload) => {
     queue.enqueue(async () => {
-
       try {
         const attachment = [];
         if (payload?.body.includes("_event_")) {
@@ -159,7 +205,9 @@ const main = async () => {
           await fs.writeFile(pathFile, buffer);
           attachment.push(pathFile);
         }
-        if(debug === true){console.log("payload in ", payload);}
+        if (debug === true) {
+          console.log("payload in ", payload);
+        }
         await handlerMessage(
           {
             phone: payload.from,
@@ -178,7 +226,9 @@ const main = async () => {
 
   bot.on("send_message", (payload) => {
     queue.enqueue(async () => {
-      if(debug === true){console.log("payload out ", payload);}
+      if (debug === true) {
+        console.log("payload out ", payload);
+      }
 
       await handlerMessage(
         {
@@ -195,5 +245,4 @@ const main = async () => {
 
 main();
 
-
-module.exports =  {chatwoot};
+module.exports = { chatwoot };
