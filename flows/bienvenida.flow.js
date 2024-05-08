@@ -17,8 +17,12 @@ module.exports = addKeyword('#_MENU_PRINCIPAL_#')
         ' ',
         '(Introduce el número de la opción)'
     ],
-    { capture: true },
-    async(ctx, { fallBack, gotoFlow }) => {
+    { capture: true, idle: 2000 },
+    async(ctx, { fallBack, gotoFlow, inRef  }) => {
+      console.log(ctx)
+      if (ctx?.idleFallBack) {
+        return gotoFlow(flujoFinal)
+    }
         const opcion = parseInt(ctx.body)
     switch(opcion) {
         case 1:
