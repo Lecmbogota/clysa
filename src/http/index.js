@@ -217,13 +217,13 @@ qrCtrl = (req, res) => {
           // Agrega el número de teléfono a la lista dinámica
           console.log(`✔ ✔ se agrega el número ${phone} al team ${currentValueOfTeamId}`);
           console.log(`✔ ✔ se agrega el número ${phone} de teléfono a la lista Negra`);
-          bot.dynamicBlacklist.add(phone);
+          await bot.dynamicBlacklist.add(phone);
         } 
-        if ( currentValueOfTeamId !== 1 || currentValueOfTeamId !== 2  || currentValueOfTeamId !== 3) {
+        if ( currentValueOfTeamId === 4) {
           // Remueve el número de teléfono de la lista dinámica
           console.log(`❌❌ se remueve el número ${phone} del team ${currentValueOfTeamId}`);
           console.log(`❌❌ se remueve el número ${phone} de teléfono de la lista Negra`);
-          bot.dynamicBlacklist.remove(phone);
+          await bot.dynamicBlacklist.remove(phone);
 
         }
         res.send("ok");
