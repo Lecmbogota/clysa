@@ -6,7 +6,8 @@ let flowDynamicCompleted = false;
 
 module.exports = addKeyword("#_/IMAGEN_SOMBREROS/_#").addAction(
   async (_, { flowDynamic, gotoFlow }) => {
-    console.log("Objeto de URLs:", urls);
+
+    console.log("Objeto de URLs:", sombreros);
 
     await flowDynamic([sombreros]);
 
