@@ -1,5 +1,5 @@
 const { addKeyword } = require("@bot-whatsapp/bot");
-const { Caballeros, Damas, Parejas, Ninios } = require('../../rutas/rutas');
+const { Caballeros, Damas, Parejas, Ninios } = require('../../../rutas/rutas');
 
 let flowDynamicCompleted = false;
 
