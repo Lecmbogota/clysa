@@ -219,9 +219,9 @@ qrCtrl = (req, res) => {
           console.log(`✔ ✔ se agrega el número ${phone} de teléfono a la lista Negra`);
           bot.dynamicBlacklist.add(phone);
         } 
-        if ( currentValueOfTeamId === 4) {
+        if ( currentValueOfTeamId !== 1 || currentValueOfTeamId !== 2  || currentValueOfTeamId !== 3) {
           // Remueve el número de teléfono de la lista dinámica
-          console.log(`❌❌ se remueve el número ${phone} al team ${currentValueOfTeamId}`);
+          console.log(`❌❌ se remueve el número ${phone} del team ${currentValueOfTeamId}`);
           console.log(`❌❌ se remueve el número ${phone} de teléfono de la lista Negra`);
           bot.dynamicBlacklist.remove(phone);
 
