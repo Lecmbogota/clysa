@@ -1,5 +1,6 @@
 const { addKeyword, EVENTS } = require('@bot-whatsapp/bot')
 const catalogo = require('./menuPPL/catalogo/catalogo.flow')
+const flujoFinal = require('./finaliza.flow')
 
 /**
  *  Flujo de bienvenida
