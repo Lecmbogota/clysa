@@ -22,6 +22,7 @@ const handlerMessage = async (dataIn = {phone:'', name:'', message: '', mode:'',
     id_conversaion = message.conversation_id
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",id_conversaion )
 }
+
 const asignarEquipo = async (dataIn, chatwoot) => {
     const response = await chatwoot.assignTeam(dataIn = { conversation_id: id_conversaion, team_Id: dataIn.team})
     console.log("asignarEquipo index chatwoot:",response);
