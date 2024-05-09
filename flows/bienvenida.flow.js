@@ -18,7 +18,7 @@ module.exports = addKeyword('#_MENU_PRINCIPAL_#')
         ' ',
         '(Introduce el número de la opción)'
     ],
-    { capture: true, idle: 36000000 },
+    { capture: true, idle: 18000000 },
     async(ctx, { fallBack, gotoFlow, inRef  }) => {
 
       if (ctx?.idleFallBack) {
