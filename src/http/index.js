@@ -193,8 +193,10 @@ qrCtrl = (req, res) => {
   chatwootCtrl = async (req, res) => {
     const body = req.body;
     const attachments = body?.attachments;
+    const estado = body?.status;
     const bot = req.bot;
     console.log("body chatwootCtrl: ",body )
+    console.log("estado:  ", estado);
     try {
       
       
@@ -220,7 +222,7 @@ qrCtrl = (req, res) => {
             console.log(`✔ ✔ se agrega el número ${phone} al team ${currentValueOfTeamId}`);
             console.log(`✔ ✔ se agrega el número ${phone} a la lista Negra`);
             bot.dynamicBlacklist.add(phone);
-        } else if (currentValueOfTeamId === 4) {
+        } else if (estado === 'resolved') {
             // Remueve el número de teléfono de la lista dinámica y de la lista negra
             console.log(`❌❌ se remueve el número ${phone} del team ${currentValueOfTeamId}`);
             console.log(`❌❌ se remueve el número ${phone} de la lista Negra`);
