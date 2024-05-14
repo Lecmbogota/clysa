@@ -198,13 +198,29 @@ class ServerHttp {
     //console.log("body chatwootCtrl: ", body);
     console.log("estado:  ", estado);
     try {
-      if (estado.includes("transito")) {
+      
+      if (estado.includes("transito")){
         const phone = body.conversation?.meta?.sender?.phone_number.replace(
           "+",
           ""
         );
-        const content = `su pedido se encuentra en transito con la guia N° ${ultima_guia}`
+        const content = `"su pedido se encuentra en transito con la guia N° ${ultima_guia}"`
+
+        const file = attachments?.length ? attachments[0] : null;
+        if (file) {
+          await bot.providerClass.sendMedia(
+            `${phone}@c.us`,
+            file.data_url,
+            content
+          );
+          res.send("ok");
+          return;
+        }
+
         await bot.providerClass.sendMessage(`${phone}`, content, {});
+
+        res.send("ok");
+        return;
       }
 
       let currentValueOfTeamId = null;
@@ -247,7 +263,6 @@ class ServerHttp {
         res.send("ok");
         return;
       }
-
       const checkIfMessage =
         body?.private == false &&
         body?.event == "message_created" &&
