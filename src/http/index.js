@@ -195,7 +195,7 @@ class ServerHttp {
 
     const estado = body?.status;
     const bot = req.bot;
-    //console.log("body chatwootCtrl: ", body);
+    console.log("body chatwootCtrl: ", body);
     console.log("estado:  ", estadoDePedido);
     try {
       
