@@ -4,8 +4,6 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 
-
-
 // Variable para almacenar el estado de autenticación
 let authenticated = false;
 
@@ -13,10 +11,10 @@ let authenticated = false;
 const checkAuth = (req, res, next) => {
   // Si está autenticado, permite el acceso
   if (authenticated) {
-      next();
+    next();
   } else {
-      // Si no está autenticado, redirige a la página de inicio de sesión
-      res.redirect('/login');
+    // Si no está autenticado, redirige a la página de inicio de sesión
+    res.redirect("/login");
   }
 };
 
@@ -28,44 +26,43 @@ class ServerHttp {
     this.port = _port;
   }
 
-// Ruta para mostrar el formulario de autenticación
-login = (req, res) => {
-  res.send(`
+  // Ruta para mostrar el formulario de autenticación
+  login = (req, res) => {
+    res.send(`
       <form action="/authenticate" method="POST">
           <label for="key">Clave:</label>
           <input type="password" id="key" name="key">
           <button type="submit">Enviar</button>
       </form>
   `);
-}
+  };
 
-// Ruta para autenticar la clave
-authenticate = (req, res) => {
-  const providedKey = req.body.key;
-  const correctKey = 'Clysa.,23'; // Reemplaza 'tu_clave_secreta' con tu clave real
-  if (providedKey === correctKey) {
+  // Ruta para autenticar la clave
+  authenticate = (req, res) => {
+    const providedKey = req.body.key;
+    const correctKey = "Clysa.,23"; // Reemplaza 'tu_clave_secreta' con tu clave real
+    if (providedKey === correctKey) {
       // Si la clave es correcta, establece el estado de autenticación como verdadero
       authenticated = true;
       // Redirige a la ruta para mostrar la imagen QR
-      res.redirect('/scan-qr');
-  } else {
+      res.redirect("/scan-qr");
+    } else {
       // Si la clave es incorrecta, muestra un mensaje de error
-      res.send('Clave incorrecta. Intenta de nuevo.');
-  }
-}
+      res.send("Clave incorrecta. Intenta de nuevo.");
+    }
+  };
 
-// Ruta para mostrar la imagen QR
-qrCtrl = (req, res) => {
-  const pathQrImage = path.join(process.cwd(), `bot.qr.png`);
-  const fileStream = fs.createReadStream(pathQrImage);
-  res.writeHead(200, { "Content-Type": "image/png" });
-  fileStream.pipe(res);
-  // Reiniciar el estado de autenticación después de un minuto
-  setTimeout(() => {
-    authenticated = false;
-}, 60000); // 60000 milisegundos = 1 minuto
-
-}
+  // Ruta para mostrar la imagen QR
+  qrCtrl = (req, res) => {
+    const pathQrImage = path.join(process.cwd(), `bot.qr.png`);
+    const fileStream = fs.createReadStream(pathQrImage);
+    res.writeHead(200, { "Content-Type": "image/png" });
+    fileStream.pipe(res);
+    // Reiniciar el estado de autenticación después de un minuto
+    setTimeout(() => {
+      authenticated = false;
+    }, 60000); // 60000 milisegundos = 1 minuto
+  };
 
   // CONTROLADORES PARA ENVIAR ARCHIVOS DE TIPO MULTIMEDIA EN EL CHATBOT
   /**
@@ -117,7 +114,6 @@ qrCtrl = (req, res) => {
       nombreArchivo
     );
 
-
     fs.access(rutaArchivoImagen, fs.constants.F_OK, (err) => {
       if (err) {
         console.error(err);
@@ -155,7 +151,6 @@ qrCtrl = (req, res) => {
       "videos",
       nombreArchivo
     );
-
 
     fs.access(rutaArchivoVideo, fs.constants.F_OK, (err) => {
       if (err) {
@@ -195,48 +190,64 @@ qrCtrl = (req, res) => {
     const attachments = body?.attachments;
     const customAttributes = body?.custom_attributes;
     const estadoDePedido = customAttributes?.estado_de_pedido;
-    console.log("estado del pedido",estadoDePedido);
+    const guia = customAttributes?.ultima_guia;
+    console.log("estado del pedido", estadoDePedido);
 
     const estado = body?.status;
     const bot = req.bot;
-    console.log("body chatwootCtrl: ",body )
+    //console.log("body chatwootCtrl: ", body);
     console.log("estado:  ", estado);
     try {
-      
-      
+      if (estado.includes("transito")) {
+        const phone = body.conversation?.meta?.sender?.phone_number.replace(
+          "+",
+          ""
+        );
+        const content = `su pedido se encuentra en transito con la guia N° ${ultima_guia}`
+        await bot.providerClass.sendMessage(`${phone}`, content, {});
+      }
+
       let currentValueOfTeamId = null;
-      
+
       if (body?.event === "conversation_updated") {
         const phone = body?.meta?.sender?.phone_number?.replace("+", "");
         const mapperAttributes = body?.changed_attributes;
-    
+
         let currentValueOfTeamId;
-    
+
         // Itera sobre los atributos cambiados
         for (const attribute of mapperAttributes) {
-            // Verifica si el nodo team_id está presente
-            if (attribute?.team_id !== undefined) {
-                currentValueOfTeamId = attribute?.team_id?.current_value;
-                break; // Una vez encontrado, sal del bucle
-            }
+          // Verifica si el nodo team_id está presente
+          if (attribute?.team_id !== undefined) {
+            currentValueOfTeamId = attribute?.team_id?.current_value;
+            break; // Una vez encontrado, sal del bucle
+          }
         }
-    
-        if (currentValueOfTeamId === 1 || currentValueOfTeamId === 2 || currentValueOfTeamId === 3) {
-            // Agrega el número de teléfono a la lista dinámica y a la lista negra
-            console.log(`✔ ✔ se agrega el número ${phone} al team ${currentValueOfTeamId}`);
-            console.log(`✔ ✔ se agrega el número ${phone} a la lista Negra`);
-            bot.dynamicBlacklist.add(phone);
-        } else if (estado === 'resolved') {
-            // Remueve el número de teléfono de la lista dinámica y de la lista negra
-            console.log(`❌❌ se remueve el número ${phone} del team ${currentValueOfTeamId}`);
-            console.log(`❌❌ se remueve el número ${phone} de la lista Negra`);
-            bot.dynamicBlacklist.remove(phone);
+
+        if (
+          currentValueOfTeamId === 1 ||
+          currentValueOfTeamId === 2 ||
+          currentValueOfTeamId === 3
+        ) {
+          // Agrega el número de teléfono a la lista dinámica y a la lista negra
+          console.log(
+            `✔ ✔ se agrega el número ${phone} al team ${currentValueOfTeamId}`
+          );
+          console.log(`✔ ✔ se agrega el número ${phone} a la lista Negra`);
+          bot.dynamicBlacklist.add(phone);
+        } else if (estado === "resolved") {
+          // Remueve el número de teléfono de la lista dinámica y de la lista negra
+          console.log(
+            `❌❌ se remueve el número ${phone} del team ${currentValueOfTeamId}`
+          );
+          console.log(`❌❌ se remueve el número ${phone} de la lista Negra`);
+          bot.dynamicBlacklist.remove(phone);
         }
-    
+
         res.send("ok");
         return;
-    }
-    
+      }
+
       const checkIfMessage =
         body?.private == false &&
         body?.event == "message_created" &&
@@ -285,7 +296,7 @@ qrCtrl = (req, res) => {
     this.app.use(express.json());
     this.app.use(express.static("public"));
     // Middleware para analizar el cuerpo de la solicitud
-this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(express.urlencoded({ extended: true }));
 
     this.app.use((req, _, next) => {
       req.bot = bot;
@@ -294,10 +305,9 @@ this.app.use(express.urlencoded({ extended: true }));
 
     this.app.post(`/chatwoot`, this.chatwootCtrl);
     this.app.post(`/authenticate`, this.authenticate);
-    
-    
+
     this.app.get(`/login`, this.login);
-    this.app.get("/scan-qr",checkAuth, this.qrCtrl);
+    this.app.get("/scan-qr", checkAuth, this.qrCtrl);
     this.app.get("/pdf/:nombreArchivo", this.getPdf);
     this.app.get("/imagen/:nombreArchivo", this.getImage);
     this.app.get("/videos/:nombreArchivo", this.getVideo);
