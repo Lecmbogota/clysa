@@ -194,6 +194,7 @@ qrCtrl = (req, res) => {
     const body = req.body;
     const attachments = body?.attachments;
     const bot = req.bot;
+    console.log("body chatwootCtrl: ",body )
     try {
       
       
