@@ -190,6 +190,7 @@ class ServerHttp {
     const attachments = body?.attachments;
     const customAttributes = body?.custom_attributes;
     const estadoDePedido = customAttributes?.estado_de_pedido;
+    const telefonoCliente = customAttributes?.phone_number;
     const guia = customAttributes?.ultima_guia;
     console.log("estado del pedido", estadoDePedido);
 
@@ -200,7 +201,7 @@ class ServerHttp {
     try {
       
       if (estadoDePedido ==="en transito"){
-        const phone = body.conversation?.meta?.sender?.phone_number.replace(
+        const phone = telefonoCliente.replace(
           "+",
           ""
         );
