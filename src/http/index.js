@@ -193,13 +193,13 @@ class ServerHttp {
     const guia = customAttributes?.ultima_guia;
     console.log("estado del pedido", estadoDePedido);
 
-    const estadoP = body?.status;
+    const estado = body?.status;
     const bot = req.bot;
     //console.log("body chatwootCtrl: ", body);
-    console.log("estado:  ", estadoP);
+    console.log("estado:  ", estadoDePedido);
     try {
       
-      if (estadoP ==="en transito"){
+      if (estadoDePedido ==="en transito"){
         const phone = body.conversation?.meta?.sender?.phone_number.replace(
           "+",
           ""
