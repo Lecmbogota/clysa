@@ -194,7 +194,7 @@ qrCtrl = (req, res) => {
     const body = req.body;
     const attachments = body?.attachments;
     const customAttributes = body?.custom_attributes;
-    const estadoDePedido = customAttributes.estado_de_pedido;
+    const estadoDePedido = customAttributes?.estado_de_pedido;
     console.log("estado del pedido",estadoDePedido);
 
     const estado = body?.status;
