@@ -205,7 +205,7 @@ class ServerHttp {
           ""
         );
         console.log("aqui telefono: ",phone);
-        const content = `"su pedido se encuentra en transito con la guia N° ${ultima_guia}"`
+        const content = `"su pedido se encuentra en transito con la guia N° ${guia}"`
 console.log( "contenido del mensaje:", content );
         const response = await bot.providerClass.sendMessage(`${phone}`, content, {});
 console.log("respuesta:", response);
