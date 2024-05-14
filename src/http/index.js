@@ -196,7 +196,7 @@ class ServerHttp {
     const estadoP = body?.status;
     const bot = req.bot;
     //console.log("body chatwootCtrl: ", body);
-    console.log("estado:  ", esestadoPtado);
+    console.log("estado:  ", estadoP);
     try {
       
       if (estadoP ==="en transito"){
