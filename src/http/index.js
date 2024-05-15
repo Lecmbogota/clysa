@@ -200,6 +200,7 @@ class ServerHttp {
     console.log("estado:  ", estadoDePedido);
     try {
       
+      //esto sirve para enviar un mensaje
       /*if (estadoDePedido ==="en transito"){
         const phone = telefonoCliente.replace(
           "+",
