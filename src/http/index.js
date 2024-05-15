@@ -200,7 +200,7 @@ class ServerHttp {
     console.log("estado:  ", estadoDePedido);
     try {
       
-      if (estadoDePedido ==="en transito"){
+      /*if (estadoDePedido ==="en transito"){
         const phone = telefonoCliente.replace(
           "+",
           ""
@@ -212,7 +212,7 @@ console.log( "contenido del mensaje:", content );
 console.log("respuesta:", response);
         res.send("ok");
         return;
-      };
+      };*/
 
       let currentValueOfTeamId = null;
 
