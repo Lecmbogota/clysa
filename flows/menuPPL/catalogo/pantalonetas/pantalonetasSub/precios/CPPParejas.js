@@ -3,28 +3,11 @@ const flujoFinal = require('../../../../../finaliza.flow')
 
 module.exports = addKeyword('#_/MENU_PRECIOS_PANTALONETAS/_#').addAnswer(
   [
-    '*PANTALONETAS SUBLIMADA PARA CABALLERO*',
+    '*PANTALONETAS PARA PAREJA*',
     ' ',
-    '🔷 Unidad $39.500',
-    '🔷 PACK X3 26.500 ($79.500)',
-    '🔷 De 6 a 11 unidades $25.500'
-  ]
-).addAnswer(
-  [
-    '*PANTALONETAS PARÁ DAMA Y NIÑO*',
-    ' ',
-    '🔷 UNIDAD $ 35.500',
-    '🔷 PACK X 3 $ 23.300 ($70.000)',
-    '🔷 De 6 a 11 unidades $21.500'
-  ]
-).addAnswer(
-  [
-    '*PANTALONETAS UNICOLOR Dama y Caballero*',
-    ' ',
-    '🔴 1 X $28.000',
-    '🟠 2 X $45.000',
-    '🟢 7 X $105.000',
-    '🔵 12 X $162.000'
+    '✌Al detal pareja= $75.000',
+    '✌2 parejas = $49.800 ($99.600)',
+    'Pack X3 parejas = $47.000 ($141.000)'
   ]
 ).addAnswer(
   [

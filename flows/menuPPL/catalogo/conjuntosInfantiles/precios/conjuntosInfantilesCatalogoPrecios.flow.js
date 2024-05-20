@@ -9,10 +9,6 @@ module.exports = addKeyword("#_/MENU_PRECIOS_PANTALONETAS/_#")
     "👾Pack X6 $19.000 ($114.000)",
     "👾Docena $17.500 ($210.000)",
   ])
-
-  //  crea una nueva funcion para establecer precios 
-  .addAnswer( 
-
   .addAnswer([
     " Si tienes alguna duda, no dudes en Contactar con un Asesor. 😉",
   ])

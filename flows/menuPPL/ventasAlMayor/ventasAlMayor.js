@@ -13,6 +13,10 @@ const flowCatalogo = addKeyword("#_/CATALOGO/_# ")
     "*PANTALONETAS PARÁ DAMA Y NIÑO*",
     " ",
     "🔷 Mayor a 12 unidades $ 17.000 ($204.000)",
+  ]).addAnswer([
+    "*PANTALONETAS PAREJAS*",
+    " ",
+    "✌Mayor a 6 parejas = $36.500 ($219.000)",
   ])
   .addAnswer(
     [
