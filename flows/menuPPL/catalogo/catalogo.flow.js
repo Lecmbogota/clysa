@@ -10,7 +10,7 @@ const flowCatalogo = addKeyword("#_/CATALOGO/_# ").addAnswer(
     "1️⃣ SOMBREROS",
     "2️⃣ PANTALONETAS",
     "3️⃣ CONJUNTOS INFANTILES",
-    "9️⃣ VOLVER AL MENU PRINCIPAL",
+    "4️⃣ VOLVER AL MENU PRINCIPAL",
   ],
   { capture: true, idle: 36000000 },
   async (ctx, { fallBack, gotoFlow, flowDynamic, inRef }) => {

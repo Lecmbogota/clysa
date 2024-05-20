@@ -10,7 +10,7 @@ module.exports = addKeyword("#_/MENU_PRINCIPAL_PANTALONETAS/_#")
       "3️⃣ PAREJAS",
       "4️⃣ UNICOLOR ECONÓMICA",
       "5️⃣ INFANTIL",
-      "9️⃣ VOLVER AL MENU PRINCIPAL",
+      "6️⃣ VOLVER AL MENU PRINCIPAL",
     ],
     { capture: true, idle: 36000000 },
     async (ctx, { gotoFlow, inRef }) => {

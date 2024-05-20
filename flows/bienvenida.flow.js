@@ -14,7 +14,7 @@ module.exports = addKeyword('#_MENU_PRINCIPAL_#')
         '1️⃣ CATALOGO DE PRODUCTOS',
         '2️⃣ PREGUNTAS FRECUENTES',
         '3️⃣ VENTAS AL POR MAYOR',
-        '8️⃣ HABLAR CON UN ASESOR',
+        '4️⃣ HABLAR CON UN ASESOR',
         ' ',
         '(Introduce el número de la opción)'
     ],
@@ -35,7 +35,7 @@ module.exports = addKeyword('#_MENU_PRINCIPAL_#')
         case 3:
             await gotoFlow(require('./menuPPL/asesor/asesorVentasPorMayor.flow'))
           break;
-        case 8:
+        case 4:
             await gotoFlow(require('./menuPPL/asesor/asesorPreguntas.flow'))
           break;
         default:

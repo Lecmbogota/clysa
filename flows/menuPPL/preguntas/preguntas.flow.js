@@ -10,8 +10,8 @@ const flowPreguntas = addKeyword('#_/CATALOGO/_# ')
     '2️⃣ DONDE ESTAMOS UBICADOS',
     '3️⃣ CUADRO DE MEDIDAS',
     '4️⃣ TELAS',
-    '8️⃣ HABLAR CON UN ASESOR',
-    '9️⃣ VOLVER AL MENU PRINCIPAL'
+    '5️⃣ HABLAR CON UN ASESOR',
+    '6️⃣ VOLVER AL MENU PRINCIPAL'
 ], {capture: true, idle: 36000000 }, async (ctx,{fallBack, gotoFlow, inRef}) => {
 
   if (ctx?.idleFallBack) {

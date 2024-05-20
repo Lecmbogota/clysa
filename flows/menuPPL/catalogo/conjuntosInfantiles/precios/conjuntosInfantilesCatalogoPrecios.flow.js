@@ -9,6 +9,10 @@ module.exports = addKeyword("#_/MENU_PRECIOS_PANTALONETAS/_#")
     "👾Pack X6 $19.000 ($114.000)",
     "👾Docena $17.500 ($210.000)",
   ])
+
+  //  crea una nueva funcion para establecer precios 
+  .addAnswer( 
+
   .addAnswer([
     " Si tienes alguna duda, no dudes en Contactar con un Asesor. 😉",
   ])
@@ -17,9 +21,9 @@ module.exports = addKeyword("#_/MENU_PRECIOS_PANTALONETAS/_#")
       "👇🏼 *Por favor, selecciona una opción:*",
       " ",
       "1️⃣ REALIZAR UN PEDIDO",
-      "8️⃣ HABLAR CON UN ASESOR",
-      "0️⃣ VOLVER AL MENU ANTERIOR",
-      "9️⃣ VOLVER AL MENU PRINCIPAL",
+      "2️⃣ HABLAR CON UN ASESOR",
+      "3️⃣ VOLVER AL MENU ANTERIOR",
+      "4️⃣ VOLVER AL MENU PRINCIPAL",
     ],
     { capture: true, idle: 36000000 },
     async (ctx, { gotoFlow, inRef }) => {
