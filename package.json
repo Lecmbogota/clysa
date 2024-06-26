@@ -5,7 +5,7 @@
     "main": "app.js",
     "scripts": {
         "pre-copy": "cd .. && npm run  copy.lib base-baileys-memory",
-        "start": "node app.js --name bot-clysa"
+        "start": "pm2 start app.js --name bot-clysa"
     },
     "keywords": [],
     "dependencies": {
