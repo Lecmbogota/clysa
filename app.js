@@ -12,10 +12,16 @@ const fs = require("node:fs/promises");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const { downloadMediaMessage, delay } = require("@whiskeysockets/baileys");
 const MockAdapter = require("@bot-whatsapp/database/mock");
+const PostgreSQLAdapter = require('@bot-whatsapp/database/postgres')
 const ServerHttp = require("./src/http");
 const ChatwootClass = require("./src/chatwoot/chatwoot.class");
 const moment = require("moment-timezone");
 
+const dbHost = process.env.POSTGRES_DB_HOST;
+const dbUser = process.env.POSTGRES_DB_USER;
+const dbPass = process.env.POSTGRES_DB_PASSWORD;
+const dbName = process.env.POSTGRES_DB_NAME;
+const dbPort = process.env.POSTGRES_DB_PORT;
 
 // Activar debug
 const debug = process.env.DEBUG;
@@ -140,7 +146,13 @@ const queue = new Queue({
 });
 
 const main = async () => {
-  const adapterDB = new MockAdapter();
+  const adapterDB = new PostgreSQLAdapter({
+    host: dbHost,
+    user: dbUser,
+    database: dbName,
+    password: dbPass,
+    port: dbPort,
+});
   const adapterFlow = createFlow([flowFiltroHorario, catalogo, fueraHorario, bienvenida, finaliza, flowSombreros, quicksilver, surf, aventura, pedido, submenusombreros, sombrerosMenu, asesor, pantalonetas, conjuntosCatalogo, preciosConjuntos, flowPreguntas , cpCaballeros, ppUnicolor, ppParejas, ppNinios, ppDamas, ppCaballeros, cpUnicolor, cpParejas, cpNinios, cpDamas, cpCaballeros, preguntas, ubicacion, medidas, telas, modosDePago, asesorPreguntas, asesorMayor]);
   const adapterProvider = createProvider(BaileysProvider);
 
