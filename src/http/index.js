@@ -235,7 +235,8 @@ console.log("respuesta:", response);
         if (
           currentValueOfTeamId === 1 ||
           currentValueOfTeamId === 2 ||
-          currentValueOfTeamId === 3
+          currentValueOfTeamId === 3 ||
+          currentValueOfTeamId === 4 
         ) {
           // Agrega el número de teléfono a la lista dinámica y a la lista negra
           console.log(
